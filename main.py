@@ -2,6 +2,12 @@ import PySimpleGUI as sg
 import RPi.GPIO as GPIO
 
 
+#setup GPIO
+GPIO.setmode(GPIO.BOARD)
+
+GPIO.setup(12, GPIO.OUT, initial=GPIO.HIGH)
+
+
 sg.theme('DarkAmber')   # Add a touch of color
 # All the stuff inside your window.
 layout = [  [sg.Button('Start'), sg.Button('Stop'), sg.Button('ex1'), sg.Button('ex2')],
