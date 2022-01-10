@@ -1,11 +1,11 @@
 import PySimpleGUI as sg
-#import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 
 
-#setup GPIO
-#GPIO.setmode(GPIO.BOARD)
+setup GPIO
+GPIO.setmode(GPIO.BOARD)
 
-#GPIO.setup(12, GPIO.OUT, initial=GPIO.LOW)
+GPIO.setup(12, GPIO.OUT, initial=GPIO.LOW)
 
 
 
