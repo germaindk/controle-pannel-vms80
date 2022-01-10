@@ -11,7 +11,16 @@ GPIO.setup(12, GPIO.OUT, initial=GPIO.HIGH)
 
 
 def Blinck(PIN,timer):
-    
+    x = 0
+    while x != timer:
+        GPIO.output(PIN, GPIO.LOW)
+        time.sleep(1)
+        GPIO.output(PIN, GPIO.HIGH)
+        time.sleep(1)
+        GPIO.output(PIN, GPIO.LOW)
+        time.sleep(0.5)
+        GPIO.output(PIN, GPIO.HIGH)
+        x = x + 1
 
 sg.theme('DarkAmber')   # Add a touch of color
 # All the stuff inside your window.
@@ -27,14 +36,7 @@ while True:
         break
     if event == 'test':
         print('Test')
-        timer = 5
-        x = 0
-        while x != timer:
-            GPIO.output(PIN, GPIO.LOW)
-            time.sleep(1)
-            GPIO.output(PIN, GPIO.HIGH)
-            x = x + 1
-        #Blinck(12,2)
+        Blinck(12,2)
     window.Refresh()    
 window.close()
 GPIO.cleanup()
