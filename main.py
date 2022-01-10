@@ -1,21 +1,17 @@
 import PySimpleGUI as sg
 import RPi.GPIO as GPIO
-
+import time
 
 #setup GPIO
 GPIO.setmode(GPIO.BOARD)
 
-GPIO.setup(12, GPIO.OUT, initial=GPIO.LOW)
+GPIO.setup(12, GPIO.OUT, initial=GPIO.HIGH)
 
 
 
 
-def Blinck(PIN,time):
-    x = 0
-    while x != time:
-        GPIO.output(PIN, GPIO.LOW)
-        GPIO.output(PIN, GPIO.HIGH)
-        x = x + 1
+def Blinck(PIN,timer):
+    
 
 sg.theme('DarkAmber')   # Add a touch of color
 # All the stuff inside your window.
@@ -28,11 +24,17 @@ window = sg.Window('Controle pannel VMS80', layout)
 while True:
     event, values = window.read()
     if event == sg.WIN_CLOSED or event == 'Cancel': # if user closes window or clicks cancel
-        GPIO.cleanup()
         break
     if event == 'test':
         print('Test')
-        Blinck(12,2)
+        timer = 5
+        x = 0
+        while x != timer:
+            GPIO.output(PIN, GPIO.LOW)
+            time.sleep(1)
+            GPIO.output(PIN, GPIO.HIGH)
+            x = x + 1
+        #Blinck(12,2)
     window.Refresh()    
 window.close()
 GPIO.cleanup()
