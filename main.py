@@ -2,7 +2,7 @@ import PySimpleGUI as sg
 import RPi.GPIO as GPIO
 
 
-setup GPIO
+#setup GPIO
 GPIO.setmode(GPIO.BOARD)
 
 GPIO.setup(12, GPIO.OUT, initial=GPIO.LOW)
@@ -28,9 +28,11 @@ window = sg.Window('Controle pannel VMS80', layout)
 while True:
     event, values = window.read()
     if event == sg.WIN_CLOSED or event == 'Cancel': # if user closes window or clicks cancel
+        GPIO.cleanup()
         break
     if event == 'test':
         print('Test')
-        Blinck(12,5)
+        Blinck(12,2)
     window.Refresh()    
 window.close()
+GPIO.cleanup()
