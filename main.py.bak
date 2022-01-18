@@ -1,21 +1,6 @@
 import PySimpleGUI as sg
 #import RPi.GPIO as GPIO
 import time
-import rtmidi
-
-
-
-#setup midi
-midiout = rtmidi.MidiOut()
-available_ports = midiout.get_ports()
-
-if available_ports:
-    midiout.open_port(0)
-    print(midiout.open_port(0))
-
-
-
-midiout.send_message("S")
 
 #setup GPIO
 #GPIO.setmode(GPIO.BOARD)
@@ -39,9 +24,9 @@ def Blinck(PIN,timer):
 
 sg.theme('DarkAmber')   # Add a touch of color
 # All the stuff inside your window.
-layout = [  [sg.Button('Start'), sg.Button('Stop'), sg.Button('ECHO Key'), sg.Button('MARK'), sg.Button('Diameter Selection'), sg.Button('Display MODE')],
-            [sg.Button('Fast'), sg.Button('Mark Time (0.6s)', key='_1_',button_color=('red')), sg.Button('Mark Time(0.8s)',key='_2_',button_color=('red')), sg.Button('Min Width (40um)',key='_5_',button_color=('red')), sg.Button('Min Width (50um)',key='_6_',button_color=('red'))],
-            [sg.Button('Slow'),sg.Button('Mark Time (1.0s)', key='_3_',button_color=('red')), sg.Button('Mark Time(1.3s)',key='_4_',button_color=('red')), sg.Button('Min Witdh (60um)',key='_7_',button_color=('red')), sg.Button('Min Witdh (80um/off',key='_8_',button_color=('red'))],
+layout = [  [sg.Button('Start'), sg.Button('Stop'), sg.Button('ECHO Key'), sg.Button('MARK'), sg.Button('Diameter Selection')],
+            [sg.Button('Fast'), sg.Button('Mark Time (0.6s)', key='_1_'), sg.Button('Mark Time(0.8s)',key='_2_'), sg.Button('Min Width (40um)',key='_5_'), sg.Button('Min Width (50um)',key='_6_')],
+            [sg.Button('Slow'),sg.Button('Mark Time (1.0s)', key='_3_'), sg.Button('Mark Time(1.3s)',key='_4_'), sg.Button('Min Witdh (60um)',key='_7_'), sg.Button('Min Witdh (80um/off',key='_8_')],
             #switch state Button
             [sg.Button('2nd Deth On', button_color=('green'), key= '_2nd_'), sg.Button('Algorithm Fast',button_color=('green'), key='_algo_'), sg.Button('Economy ON', key = '_Eco_', button_color=('green')), sg.Button('Safety Groove On', button_color=('green'), key='_SaG_')] ]
 
@@ -53,7 +38,7 @@ algo_down = True
 SaG_down = True
 
 Mark_Time = 'false'
-Min_Width = 'false'
+Min_With = 'false'
 
 
 # Create the Window
@@ -84,12 +69,12 @@ while True:
 #**********************************************************************************************
     #Button Mark Time
     if event == '_1_':
-        if Mark_Time == 'false':
-            Mark_Time = '_1_'
+        if Min_With == 'false':
+            Min_With = '_1_'
             window.Element('_1_').Update(button_color=('green'))
         else:
-            window.Element(Mark_Time).Update(button_color=('red'))
-            Mark_Time = '_1_'
+            window.Element(Min_With).Update(button_color=('red'))
+            Min_With = '_1_'
             window.Element('_1_').Update(button_color='green')
     
     if event == '_2_':
@@ -121,39 +106,39 @@ while True:
 #*********************************************************************************************
     #Button Min With
     if event == '_5_':
-        if Min_Width == 'false':
-            Min_Width = '_5_'
+        if Min_With == 'false':
+            Min_With = '_5_'
             window.Element('_5_').Update(button_color=('green'))
         else:
-            window.Element(Min_Width).Update(button_color=('red'))
-            Min_Width = '_5_'
+            window.Element(Min_With).Update(button_color=('red'))
+            Min_With = '_5_'
             window.Element('_5_').Update(button_color='green')
     
     if event == '_6_':
-        if Min_Width == 'false':
-            Min_Width = '_6_'
+        if Min_With == 'false':
+            Min_With = '_6_'
             window.Element('_6_').Update(button_color=('green'))
         else:
-            window.Element(Min_Width).Update(button_color=('red'))
-            Min_Width = '_6_'
+            window.Element(Min_With).Update(button_color=('red'))
+            Min_With = '_6_'
             window.Element('_6_').Update(button_color='green')
     
     if event == '_7_':
-        if Min_Width == 'false':
-            Min_Width = '_7_'
+        if Min_With == 'false':
+            Min_With = '_7_'
             window.Element('_7_').Update(button_color=('green'))
         else:
-            window.Element(Min_Width).Update(button_color=('red'))
-            Min_Width = '_7_'
+            window.Element(Min_With).Update(button_color=('red'))
+            Min_With = '_7_'
             window.Element('_7_').Update(button_color='green')
     
     if event == '_8_':
-        if Min_Width == 'false':
-            Min_Width = '_8_'
+        if Min_With == 'false':
+            Min_With = '_8_'
             window.Element('_8_').Update(button_color=('green'))
         else:
-            window.Element(Min_Width).Update(button_color=('red'))
-            Min_Width = '_8_'
+            window.Element(Min_With).Update(button_color=('red'))
+            Min_With = '_8_'
             window.Element('_8_').Update(button_color='green')
 
 window.Refresh()    
